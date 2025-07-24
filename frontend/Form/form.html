@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smart Route Feedback</title>
+  <link rel="stylesheet" href="form.css" />
+</head>
+<body>
+  <div class="container">
+    <h2>🗺️ Smart Route Feedback</h2>
+    <p class="sub">Track your journey and share your experience.</p>
+    
+    <div class="btn-group">
+      <button id="startRoute">▶️ Start Route</button>
+      <button id="endRoute" disabled>⏹️ End Route</button>
+    </div>
+
+    <!-- Delay Feedback Form -->
+    <form id="delayFeedback" class="hidden card animated">
+      <h3>⚠️ It seems there was a delay.</h3>
+      <p>Help us understand why and rate your route.</p>
+
+      <label>Reason for delay:</label>
+      <input type="text" name="reason" required placeholder="e.g., Traffic jam, roadblock" />
+
+      <label>Road Condition:</label>
+      <select name="roadCondition" required>
+        <option value="">-- Select --</option>
+        <option value="good">Good</option>
+        <option value="average">Average</option>
+        <option value="poor">Poor</option>
+      </select>
+
+      <label>Scenic Beauty (1-5):</label>
+      <input type="number" name="scenic" min="1" max="5" required />
+
+      <label>Overall Rating (1-5):</label>
+      <input type="number" name="rating" min="1" max="5" required />
+
+      <button type="submit">Submit Feedback</button>
+    </form>
+
+    <!-- No Delay Feedback Form -->
+    <form id="noDelayFeedback" class="hidden card animated">
+      <h3>✅ You reached on time!</h3>
+      <p>Would you like to rate your route experience?</p>
+
+      <label>Road Condition:</label>
+      <select name="roadCondition" required>
+        <option value="">-- Select --</option>
+        <option value="good">Good</option>
+        <option value="average">Average</option>
+        <option value="poor">Poor</option>
+      </select>
+
+      <label>Scenic Beauty (1-5):</label>
+      <input type="number" name="scenic" min="1" max="5" required />
+
+      <label>Overall Rating (1-5):</label>
+      <input type="number" name="rating" min="1" max="5" required />
+
+      <button type="submit">Submit Rating</button>
+    </form>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script src="form.js"></script>
+</body>
+</html>
