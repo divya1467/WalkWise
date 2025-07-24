@@ -1,5 +1,5 @@
 let startTime;
-let googleEtaInMinutes = 1; // Simulated ETA
+let googleEtaInMinutes = 1;
 
 const startBtn = document.getElementById("startRoute");
 const endBtn = document.getElementById("endRoute");
@@ -15,7 +15,7 @@ startBtn.addEventListener("click", () => {
 
 endBtn.addEventListener("click", () => {
   const endTime = new Date();
-  const actualTime = (endTime - startTime) / 60000; // in minutes
+  const actualTime = (endTime - startTime) / 60000;
   const threshold = 1.2;
 
   if (actualTime > googleEtaInMinutes * threshold) {
@@ -29,25 +29,88 @@ endBtn.addEventListener("click", () => {
   endBtn.disabled = true;
 });
 
-// Handle Delay Feedback Form
+// Star rating
+document.querySelectorAll(".star-rating").forEach(container => {
+  const inputId = container.getAttribute("data-input");
+  for (let i = 1; i <= 5; i++) {
+    const star = document.createElement("span");
+    star.innerHTML = "★";
+    star.classList.add("star");
+    star.dataset.value = i;
+    star.addEventListener("click", () => {
+      document.getElementById(inputId).value = i;
+      updateStars(container, i);
+      handleReasonVisibility(inputId, i);
+    });
+    container.appendChild(star);
+  }
+});
+
+function updateStars(container, value) {
+  container.querySelectorAll(".star").forEach((star, index) => {
+    star.style.color = index < value ? "gold" : "#ccc";
+  });
+}
+
+function handleReasonVisibility(inputId, rating) {
+  const formPrefix = inputId.includes("delay") ? "delay" : "noDelay";
+  const lowDiv = document.getElementById(`${formPrefix}LowReasons`);
+  const highDiv = document.getElementById(`${formPrefix}HighReasons`);
+
+  if (rating >= 4) {
+    highDiv.classList.remove("hidden");
+    lowDiv.classList.add("hidden");
+  } else {
+    lowDiv.classList.remove("hidden");
+    highDiv.classList.add("hidden");
+  }
+}
+
+// Delay form submission
 delayForm.addEventListener("submit", async (e) => {
   e.preventDefault();
-  const data = Object.fromEntries(new FormData(delayForm));
+  const formData = new FormData(delayForm);
+  const data = {
+    source: "Source A",
+    destination: "Destination B",
+    rating: formData.get("rating"),
+    reason: formData.get("reason"),
+    context: formData.get("rating") >= 4 ? formData.get("highReasons") : formData.get("lowReasons")
+  };
   delayForm.classList.add("hidden");
   showToast("Thanks for the delay feedback!");
-  // Optional: send data to server
+  await postFeedback(data);
 });
 
-// Handle No Delay Feedback Form
+// No delay form submission
 noDelayForm.addEventListener("submit", async (e) => {
   e.preventDefault();
-  const data = Object.fromEntries(new FormData(noDelayForm));
+  const formData = new FormData(noDelayForm);
+  const data = {
+    source: "Source A",
+    destination: "Destination B",
+    rating: formData.get("rating"),
+    reason: formData.get("rating") >= 4 ? formData.get("highReasons") : formData.get("lowReasons")
+  };
   noDelayForm.classList.add("hidden");
   showToast("Thanks for your rating!");
-  // Optional: send data to server
+  await postFeedback(data);
 });
 
-// Toast
+async function postFeedback(data) {
+  try {
+    await fetch("http://localhost:5000/api/save-feedback", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
+  } catch (error) {
+    console.error("Failed to save feedback:", error);
+  }
+}
+
 function showToast(message) {
   const toast = document.getElementById("toast");
   toast.innerText = message;
