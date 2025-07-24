@@ -1,0 +1,42 @@
+[
+{
+"id": "route1",
+"type": "Fastest",
+"color": "blue",
+"scenicScore": 2,
+"roadCondition": 4,
+"safety": 3,
+"difficulty": 1,
+"averageTime": 28,
+"lastUpdated": "2025-07-20",
+"feedbackCount": 18,
+"polyline": "encoded-polyline-1"
+},
+{
+"id": "route2",
+"type": "Scenic",
+"color": "green",
+"scenicScore": 5,
+"roadCondition": 5,
+"safety": 5,
+"difficulty": 2,
+"averageTime": 35,
+"lastUpdated": "2025-07-22",
+"feedbackCount": 42,
+"polyline": "encoded-polyline-2"
+},
+{
+"id": "route3",
+"type": "Difficult",
+"color": "red",
+"scenicScore": 1,
+"roadCondition": 2,
+"safety": 1,
+"difficulty": 4,
+"averageTime": 50,
+"lastUpdated": "2025-07-15",
+"feedbackCount": 7,
+"polyline": "encoded-polyline-3"
+}
+]
+
