@@ -32,6 +32,7 @@ Walkwise is a crowdsourced route recommendation system built using Google Maps. 
 1. Clone the repo:
 
 ```bash
-git clone https://github.com/your-username/walkwise.git
+git clone https://github.com/divya1467/WalkWise.git
 cd walkwise
 
+```
