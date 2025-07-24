@@ -10,7 +10,7 @@
   <div class="container">
     <h2>🗺️ Smart Route Feedback</h2>
     <p class="sub">Track your journey and share your experience.</p>
-    
+
     <div class="btn-group">
       <button id="startRoute">▶️ Start Route</button>
       <button id="endRoute" disabled>⏹️ End Route</button>
@@ -24,19 +24,31 @@
       <label>Reason for delay:</label>
       <input type="text" name="reason" required placeholder="e.g., Traffic jam, roadblock" />
 
-      <label>Road Condition:</label>
-      <select name="roadCondition" required>
-        <option value="">-- Select --</option>
-        <option value="good">Good</option>
-        <option value="average">Average</option>
-        <option value="poor">Poor</option>
-      </select>
+      <label>Overall Rating:</label>
+      <div class="star-rating" data-input="delayRating"></div>
+      <input type="hidden" name="rating" id="delayRating" value="0" />
 
-      <label>Scenic Beauty (1-5):</label>
-      <input type="number" name="scenic" min="1" max="5" required />
+      <div id="delayLowReasons" class="hidden">
+        <label>What went wrong?</label>
+        <select name="lowReasons">
+          <option value="">-- Select --</option>
+          <option value="Bad Road Conditions">Bad Road Conditions</option>
+          <option value="Heavy Traffic">Heavy Traffic</option>
+          <option value="Poor Signage">Poor Signage</option>
+          <option value="Unsafe Areas">Unsafe Areas</option>
+        </select>
+      </div>
 
-      <label>Overall Rating (1-5):</label>
-      <input type="number" name="rating" min="1" max="5" required />
+      <div id="delayHighReasons" class="hidden">
+        <label>What did you like?</label>
+        <select name="highReasons">
+          <option value="">-- Select --</option>
+          <option value="Scenic Route">Scenic Route</option>
+          <option value="Smooth Roads">Smooth Roads</option>
+          <option value="Less Traffic">Less Traffic</option>
+          <option value="Good Signage">Good Signage</option>
+        </select>
+      </div>
 
       <button type="submit">Submit Feedback</button>
     </form>
@@ -46,19 +58,31 @@
       <h3>✅ You reached on time!</h3>
       <p>Would you like to rate your route experience?</p>
 
-      <label>Road Condition:</label>
-      <select name="roadCondition" required>
-        <option value="">-- Select --</option>
-        <option value="good">Good</option>
-        <option value="average">Average</option>
-        <option value="poor">Poor</option>
-      </select>
+      <label>Overall Rating:</label>
+      <div class="star-rating" data-input="noDelayRating"></div>
+      <input type="hidden" name="rating" id="noDelayRating" value="0" />
 
-      <label>Scenic Beauty (1-5):</label>
-      <input type="number" name="scenic" min="1" max="5" required />
+      <div id="noDelayLowReasons" class="hidden">
+        <label>What went wrong?</label>
+        <select name="lowReasons">
+          <option value="">-- Select --</option>
+          <option value="Bad Road Conditions">Bad Road Conditions</option>
+          <option value="Heavy Traffic">Heavy Traffic</option>
+          <option value="Poor Signage">Poor Signage</option>
+          <option value="Unsafe Areas">Unsafe Areas</option>
+        </select>
+      </div>
 
-      <label>Overall Rating (1-5):</label>
-      <input type="number" name="rating" min="1" max="5" required />
+      <div id="noDelayHighReasons" class="hidden">
+        <label>What did you like?</label>
+        <select name="highReasons">
+          <option value="">-- Select --</option>
+          <option value="Scenic Route">Scenic Route</option>
+          <option value="Smooth Roads">Smooth Roads</option>
+          <option value="Less Traffic">Less Traffic</option>
+          <option value="Good Signage">Good Signage</option>
+        </select>
+      </div>
 
       <button type="submit">Submit Rating</button>
     </form>
